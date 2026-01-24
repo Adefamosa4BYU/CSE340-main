@@ -6,6 +6,9 @@
 # node_modules is a storage folder for Node and
 # can get very large.
 node_modules
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
 
 # .env file is for local use only. It contains
 # values not to be shared and most of the values
@@ -14,3 +17,4 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+Thumbs.db
