@@ -4,3 +4,170 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #ffffff;
+  color: #000;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.top-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.account-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav {
+  background-color: #1f1f1f;
+}
+
+.main-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+}
+
+.main-nav li {
+  margin-right: 1.5rem;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: center;
+}
+
+.vehicle-link {
+  color: #00576B;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.features {
+  padding-left: 1rem;
+}
+
+.cta-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #00576B;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-image img {
+  max-width: 100%;
+}
+
+.content-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.upgrade-card {
+  background-color: #00a4c9;
+  padding: 0.5rem;
+  text-align: center;
+  color: #000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upgrade-card img {
+  /* max-width: 100%;
+  height: auto;
+  width: 250px; */
+   width: 250px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.upgrade-card p {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.reviews ul {
+  padding-left: 1.2rem;
+}
+
+.reviews li {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero,
+  .content-grid {
+    flex-direction: column;
+  }
+
+  .main-nav ul {
+    flex-direction: flex;
+  }
+
+  .main-nav li {
+    margin-bottom: 0.5rem;
+  }
+
+   .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upgrade-grid {
+    grid-template-columns: repeat(2 1fr);
+  }
+}

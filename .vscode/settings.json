@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "dpg-d5qnl3p5pdvs7399sos0-a",
+            "connectString": "postgresql://adefam_cse_340_02:rQ4doqrhZ4ueRQ5taiGtWZR628JQlX8G@dpg-d5qnl3p5pdvs7399sos0-a.ohio-postgres.render.com/adefam_cse_340_02"
+        }
+    ]
+}
