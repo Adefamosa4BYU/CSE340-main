@@ -10,6 +10,17 @@ body {
   margin: 0;
   background-color: #ffffff;
   color: #000;
+  background-image: url("../images/site/small_check.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+#wrapper {
+  max-width: 1000px;
+  margin: 1rem auto;
+  background-color: #fff;
+  padding: 1rem;
+  border: #00a4c9 2px solid;
 }
 
 .top-header {
@@ -19,9 +30,17 @@ body {
   padding: 1rem;
 }
 
-.top-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
+.siteName a {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+#tools a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
 }
 
 .account-link {
@@ -57,28 +76,45 @@ body {
 }
 
 .hero {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.hero-title {
+  margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .hero-text {
-  flex: 1;
+  position: absolute;
+  top: 4.5rem;
+  left: 4rem;
+  display: inline-block;
+  width: 100%;
+  max-width: 350px;
+  background-color: rgba(101, 100, 100, 0.192);
+  padding: 1rem;
 }
 
-.hero-image {
-  flex: 1;
-  text-align: center;
+.hero-image img {
+    width: 100%;
+  height: auto;
+  display: block;
 }
 
 .vehicle-link {
   color: #00576B;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 700;
   text-decoration: none;
 }
 
 .features {
   padding-left: 1rem;
+  list-style-type: none;
+  color: #005768;
+  font-size: 1.5rem;
 }
 
 .cta-btn {
@@ -117,11 +153,8 @@ body {
 }
 
 .upgrade-card img {
-  /* max-width: 100%;
-  height: auto;
-  width: 250px; */
-   width: 250px;
-  height: 180px;
+   width: 220px;
+  height: 150px;
   object-fit: contain;
   display: block;
 }
@@ -143,31 +176,165 @@ body {
 footer {
   margin-top: 2rem;
   padding: 1rem;
-  background-color: #000;
-  color: #fff;
+  /* background-color: #000; */
+  color: #333;
   font-size: 0.9rem;
+  text-align: left;
+}
+
+
+/* Other Pages */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+#inv-display li {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
   text-align: center;
 }
 
+#inv-display img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+
+.namePrice {
+  margin-top: 0.5rem;
+}
+
+.namePrice h2 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.namePrice a {
+  text-decoration: none;
+  color: #1a73e8;
+}
+
+.namePrice a:hover {
+  text-decoration: underline;
+}
+
+.namePrice span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.vehicle-container {
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping on small screens */
+  gap: 20px;       /* space between image and info */
+  margin: 20px 0;
+  align-items: flex-start;
+}
+
+.vehicle-image {
+  flex: 1 1 400px; /* grow, shrink, base width */
+  max-width: 500px;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.vehicle-info {
+  flex: 1 1 300px;
+  background-color: #fff;
+  padding: 0px 20px;
+  border-radius: 8px;
+}
+
+.vehicle-info h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.vehicle-info p {
+  margin: 18px 0;
+  font-size: 1.1rem;
+}
+
+.vehicle-info strong {
+  display: inline-block;
+  width: 100px; /* aligns labels vertically */
+  font-weight: bold;
+}
+
+
 @media (max-width: 768px) {
-  .hero,
+
+  /* ===== Hero Section ===== */
+  .hero-text {
+    position: static;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  /* ===== Main Content Layout ===== */
   .content-grid {
-    flex-direction: column;
-  }
-
-  .main-nav ul {
-    flex-direction: flex;
-  }
-
-  .main-nav li {
-    margin-bottom: 0.5rem;
-  }
-
-   .content-grid {
     grid-template-columns: 1fr;
   }
 
+  /* ===== Upgrades Section ===== */
   .upgrade-grid {
-    grid-template-columns: repeat(2 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .upgrade-card {
+    width: 100%;
+  }
+
+  .upgrade-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== Inventory Grid ===== */
+  #inv-display {
+    grid-template-columns: 1fr;
+  }
+
+
+  .vehicle-container {
+    flex-direction: column;
+  }
+  
+  .vehicle-image, .vehicle-info {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .vehicle-info strong {
+    width: auto;
+  }
+
+}
+
+@media (max-width: 468px) {
+  .main-nav a {
+    font-size: 0.6rem;
   }
 }
+
+
