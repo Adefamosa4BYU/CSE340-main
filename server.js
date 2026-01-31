@@ -66,6 +66,12 @@ const host = process.env.HOST
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, "0.0.0.0", () => {
-  console.log(`app listening on ${port}`)
+// app.listen(port, "0.0.0.0", () => {
+//   console.log(`app listening on ${port}`)
+// })
+
+const server = http.createServer(app)
+
+server.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+  console.log(`Server listening on port ${process.env.PORT}`)
 })
