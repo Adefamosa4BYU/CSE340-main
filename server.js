@@ -15,6 +15,7 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const errorController = require("./controllers/errorController")
 const http = require("http")
+const port = process.env.PORT || 3000
 
 /* ***********************
  * Routes
@@ -67,12 +68,12 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 3000
-const server = http.createServer(app)
+
+// const server = http.createServer(app)
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-server.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`server listening on port ${port}`)
 })
