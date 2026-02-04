@@ -48,13 +48,13 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = []
   try {
-    nav = await utilities.getNav()
+    // nav = await utilities.getNav()
     console.error(`Error at: "${req.originalUrl}": ${err.message}`)
     if(err.status == 404){ message = err.message} else {message = err.message || 'Oh no! There was a crash. Maybe try a different route?'}
     res.render("errors/error", {
       title: err.status || 'Server Error',
       message,
-      nav
+      // nav
     })
 
   } catch (err) {
@@ -67,12 +67,8 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 10000
+const port = process.env.PORT || 3000
 const server = http.createServer(app)
-
-// Prevent Render 502 / timeout kills
-server.keepAliveTimeout = 120000   // 120 seconds
-server.headersTimeout = 120000     // 120 seconds
 
 /* ***********************
  * Log statement to confirm server operation
