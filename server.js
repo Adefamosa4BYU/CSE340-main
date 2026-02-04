@@ -67,8 +67,12 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 10000
 const server = http.createServer(app)
+
+// Prevent Render 502 / timeout kills
+server.keepAliveTimeout = 120000   // 120 seconds
+server.headersTimeout = 120000     // 120 seconds
 
 /* ***********************
  * Log statement to confirm server operation
