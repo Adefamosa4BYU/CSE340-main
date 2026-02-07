@@ -300,7 +300,6 @@ footer {
   text-align: center;
 }
 
-
 .register-form {
   display: flex;
   flex-direction: column;
@@ -326,6 +325,78 @@ footer {
   text-align: left;
   padding: 0;
 }
+
+.inventory-form {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-form form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.inventory-form label {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.inventory-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.inventory-form input:focus,
+.inventory-form textarea:focus,
+.inventory-form select:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 4px rgba(0, 122, 204, 0.4);
+}
+
+.inventory-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007acc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.inventory-form button:hover {
+  background-color: #005fa3;
+}
+
+.errors {
+  background: #ffe6e6;
+  border: 1px solid #cc0000;
+  padding: 1rem;
+  border-radius: 4px;
+  list-style: none;
+}
+
+.errors li {
+  color: #cc0000;
+}
+
 
 
 
