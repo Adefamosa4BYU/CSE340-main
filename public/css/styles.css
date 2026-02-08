@@ -397,6 +397,18 @@ footer {
   color: #cc0000;
 }
 
+.notice {
+  background: #f3fff8;
+  border: 1px solid #a4fdcb;
+  padding: 1rem;
+  border-radius: 4px;
+  list-style: none;
+}
+
+.notice li {
+  color: #01210f;
+}
+
 
 
 

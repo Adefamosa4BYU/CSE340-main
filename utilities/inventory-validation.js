@@ -36,26 +36,33 @@ validate.checkClassificationData = async (req, res, next) => {
 validate.inventoryRules = () => {
   return [
     body("classification_id")
+      .trim()
       .notEmpty()
       .withMessage("Please select a classification."),
 
     body("inv_make")
       .trim()
+      .escape()
       .notEmpty()
       .withMessage("Make is required."),
 
     body("inv_model")
       .trim()
+      .escape()
       .notEmpty()
       .withMessage("Model is required."),
 
     body("inv_year")
       .isInt({ min: 1900, max: 2099 })
+      .trim()
+        .notEmpty()
+        .isLength({ min: 4, max: 4 })
       .withMessage("Year must be a valid number."),
 
     body("inv_description")
       .trim()
       .notEmpty()
+      .escape()
       .withMessage("Description is required."),
 
     body("inv_image")
@@ -79,6 +86,7 @@ validate.inventoryRules = () => {
     body("inv_color")
       .trim()
       .notEmpty()
+      .escape()
       .withMessage("Color is required.")
   ]
 }

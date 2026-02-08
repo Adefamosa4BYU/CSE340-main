@@ -29,7 +29,6 @@ const validate = {}
       // valid email is required and cannot already exist in the DB
       body("account_email")
       .trim()
-      .escape()
       .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
@@ -88,7 +87,6 @@ validate.checkRegData = async (req, res, next) => {
       // valid email is required and cannot already exist in the DB
       body("account_email")
       .trim()
-      .escape()
       .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
@@ -136,6 +134,6 @@ validate.checkLoginData = async (req, res, next) => {
   }
   next()
 }
-
+ 
 
 module.exports = validate
