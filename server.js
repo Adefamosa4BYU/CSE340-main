@@ -7,6 +7,7 @@
  *************************/
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
+const cookieParser = require("cookie-parser")
 const env = require("dotenv").config()
 const app = express()
 const bodyParser = require("body-parser")
@@ -25,6 +26,7 @@ const pool = require('./database/')
 const flash = require("connect-flash")
 const messages = require("express-messages")
 
+
 /* ***********************
  * Routes
  *************************/
@@ -34,8 +36,11 @@ app.use(static)
 /* ***********************
  * Middleware
  * ************************/
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 
  app.use(session({
   store: new (require('connect-pg-simple')(session))({

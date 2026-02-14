@@ -411,6 +411,45 @@ footer {
 
 
 
+/* ======================
+   Inventory Management Table
+====================== */
+
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #ffffff;
+}
+
+#inventoryDisplay thead {
+  background-color: #333;
+  color: #ffffff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.modify-link {
+  color: #007acc;
+}
+
+.delete-link {
+  color: #cc0000;
+}
+
 
 
 @media (max-width: 768px) {
@@ -469,6 +508,12 @@ footer {
 @media (max-width: 468px) {
   .main-nav a {
     font-size: 0.6rem;
+  }
+
+   #inventoryDisplay th,
+  #inventoryDisplay td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
   }
 }
 

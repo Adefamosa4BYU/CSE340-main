@@ -1,0 +1,49 @@
+<main class="inventory-form">
+  <h1>Modify Inventory</h1>
+  <%- messages() %>
+
+  <% if (errors) { %>
+  <ul class="errors">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+  <form action="/inv/edit-inventory" method="post">
+
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+    <label>Classification</label>
+    <%- classificationSelect %>
+
+    <label>Make</label>
+    <input name="inv_make" value="<%= inv_make %>" required>
+
+    <label>Model</label>
+    <input name="inv_model" value="<%= inv_model %>" required>
+
+    <label>Year</label>
+    <input type="number" name="inv_year" value="<%= inv_year %>" required>
+
+    <label>Description</label>
+    <textarea name="inv_description" required><%= locals.inv_description %></textarea>
+
+    <label>Image Path</label>
+    <input type="text" name="inv_image" value="<%= inv_image %>" required>
+
+    <label>Thumbnail Path</label>
+    <input type="text" name="inv_thumbnail" value="<%= inv_thumbnail %>" required>
+
+    <label>Price</label>
+    <input type="number" name="inv_price" value="<%= inv_price %>" required>
+
+    <label>Miles</label>
+    <input type="number" name="inv_miles" value="<%= inv_miles %>" required>
+
+    <label>Color</label>
+    <input type="text" name="inv_color" value="<%= inv_color %>" required>
+
+    <button type="submit">Update Inventory</button>
+  </form>
+</main>
