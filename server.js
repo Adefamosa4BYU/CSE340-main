@@ -37,7 +37,6 @@ app.use(static)
  * Middleware
  * ************************/
 app.use(cookieParser())
-app.use(utilities.checkJWTToken)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -56,9 +55,12 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
+  res.locals.loggedin = false
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates

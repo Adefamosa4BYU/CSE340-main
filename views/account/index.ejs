@@ -12,7 +12,37 @@
       </ul>
       <% } %>
 
-      <p>You're logged in</p>
+      <% if (loggedin) { %>
+
+            <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+                <!-- Greeting for Employee/Admin -->
+                <h2>Welcome <%= accountData.account_firstname %></h2>
+
+                <!-- Update Account Information (visible for all) -->
+                <p>
+                    <a href="/account/update/<%= accountData.account_id %>">
+                        Update Account Information
+                    </a>
+                </p>
+
+                <!-- Inventory Management section only for Employee/Admin -->
+                <h3>Inventory Management</h3>
+                <p>
+                    <a href="/inv/">Manage Inventory</a>
+                </p>
+
+            <% } else { %>
+                <!-- Client view -->
+                <p>
+                    <a href="/account/update/<%= accountData.account_id %>">
+                        Update Account Information
+                    </a>
+                </p>
+            <% } %>
+
+        <% } else { %>
+            <p>Please <a href="/account/login">log in</a> to access account features.</p>
+        <% } %>
 
     </main>
 

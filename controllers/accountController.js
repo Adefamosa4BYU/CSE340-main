@@ -96,6 +96,7 @@ async function registerAccount(req, res) {
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
+  
   const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
@@ -116,7 +117,12 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/")
+       res.status(400).render("account/", {
+        title: "Welcome Page",
+      nav,
+      errors: null,
+    })
+      return 
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
@@ -132,4 +138,112 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, loginPages }
+async function buildUpdateView(req, res) {
+  let nav = await utilities.getNav()
+  const account_id = req.params.account_id
+  const accountData = await accountModel.getAccountById(account_id)
+
+  res.render("account/update", {
+    title: "Update Account",
+    ...accountData,
+    nav,
+    errors: null,
+  })
+}
+
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_id, account_firstname, account_lastname, account_email } = req.body
+
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (updateResult || updateResult.rowCount > 0) {
+    req.flash("notice", "Account updated successfully.")
+
+     const accountData = await accountModel.getAccountById(account_id);
+
+     res.status(400).render("account/index", {
+      title: "Account Management",
+      nav,
+      accountData,
+      errors: null,
+    })
+    return
+  } else {
+    req.flash("notice", "Update failed.")
+    return res.redirect(`/account/update/${account_id}`)
+  }
+}
+
+
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
+
+  // Server-side password validation
+  if (!account_password || account_password.length < 8) {
+    req.flash("notice", "Password must be at least 8 characters long");
+    const accountData = await accountModel.getAccountById(account_id);
+    return res.render("account/update", {
+      title: "Update Account",
+      nav,
+      accountData,
+      errors: null
+    });
+  }
+
+  // Add optional: password complexity check
+  const pwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+  if (account_password && !pwRegex.test(account_password)) {
+    req.flash("notice", "Password must include uppercase, lowercase, and a number");
+    const accountData = await accountModel.getAccountById(account_id);
+    return res.render("account/update", {
+      title: "Update Account",
+      nav,
+      accountData,
+      errors: null
+    });
+  }
+
+  const hashedPassword = await bcrypt.hash(account_password, 10)
+
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
+
+  if (updateResult || updateResult.rowCount > 0) {
+    req.flash("notice", "Password updated successfully.");
+    const accountData = await accountModel.getAccountById(account_id);
+    return res.render("account/index", {
+      title: "Account Management",
+      nav,
+      accountData,
+      errors: null
+    });
+  } else {
+    req.flash("notice", "Password update failed. Try again.");
+    const accountData = await accountModel.getAccountById(account_id);
+    return res.render("account/update", {
+      title: "Update Account",
+      nav,
+      accountData,
+      errors: null
+    });
+  }
+}
+
+
+async function logout(req, res) {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  return res.redirect("/")
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, loginPages, buildUpdateView, updateAccount, updatePassword, logout }

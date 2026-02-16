@@ -10,15 +10,16 @@
   </ul>
   <% } %>
 
-  <form action="/inv/edit-inventory" method="post">
+  <form id="updateForm" action="/inv/update" method="post">
 
-    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <input type="hidden" name="inv_id"
+<% if (inv_id) { %> value="<%= inv_id %>" <% } %>>
 
     <label>Classification</label>
     <%- classificationSelect %>
 
     <label>Make</label>
-    <input name="inv_make" value="<%= inv_make %>" required>
+    <input name="inv_make" id="inv_make" value="<%= inv_make %>" required>
 
     <label>Model</label>
     <input name="inv_model" value="<%= inv_model %>" required>
@@ -27,7 +28,7 @@
     <input type="number" name="inv_year" value="<%= inv_year %>" required>
 
     <label>Description</label>
-    <textarea name="inv_description" required><%= locals.inv_description %></textarea>
+    <textarea name="inv_description" required><%= inv_description %></textarea>
 
     <label>Image Path</label>
     <input type="text" name="inv_image" value="<%= inv_image %>" required>
@@ -44,6 +45,8 @@
     <label>Color</label>
     <input type="text" name="inv_color" value="<%= inv_color %>" required>
 
-    <button type="submit">Update Inventory</button>
+    <button type="submit" disabled>Update Inventory</button>
   </form>
 </main>
+
+<script src="/js/inv-update.js"></script>

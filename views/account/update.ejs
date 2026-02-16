@@ -1,0 +1,56 @@
+<main class="account-main">
+<h1><%= title %></h1>
+
+<%- messages() %>
+
+ <% if (errors) { %>
+  <ul class="errors">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<!-- ACCOUNT UPDATE FORM -->
+<form action="/account/update" method="post">
+  
+  <label for="account_firstname">First Name</label>
+  <input type="text" name="account_firstname"
+         value="<%= accountData.account_firstname %>" required>
+
+  <label for="account_lastname">Last Name</label>
+  <input type="text" name="account_lastname"
+         value="<%= accountData.account_lastname %>" required>
+
+  <label for="account_email">Email</label>
+  <input type="email" name="account_email"
+         value="<%= accountData.account_email %>" required>
+
+  <input type="hidden" name="account_id"
+         value="<%= accountData.account_id %>">
+
+  <input type="submit" value="Update Account">
+</form>
+
+<hr>
+
+<!-- PASSWORD CHANGE FORM -->
+<form action="/account/update-password" method="post">
+
+  <label for="account_password">New Password</label>
+  <input type="password"
+         name="account_password"
+         required
+         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}">
+
+  <p>Password must be 12+ characters including uppercase, lowercase and number.</p>
+
+  <input type="hidden"
+         name="account_id"
+         value="<%= accountData.account_id %>">
+
+  <input type="submit"
+         value="Change Password">
+
+</form>
+</main>

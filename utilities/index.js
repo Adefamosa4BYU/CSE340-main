@@ -102,10 +102,11 @@ Util.checkJWTToken = (req, res, next) => {
     if (err) {
      req.flash("Please log in")
      res.clearCookie("jwt")
+     res.locals.loggedin = false
      return res.redirect("/account/login")
     }
     res.locals.accountData = accountData
-    res.locals.loggedin = 1
+    res.locals.loggedin = true
     next()
    })
  } else {
@@ -126,5 +127,17 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+
+ Util.checkEmployeeOrAdmin = (req, res, next) => {
+  if (res.locals.accountData &&
+      (res.locals.accountData.account_type === "Employee" ||
+       res.locals.accountData.account_type === "Admin")) {
+    return next()
+  }
+
+  req.flash("notice", "You must be logged in as Employee or Admin.")
+  return res.redirect("/account/login")
+}
 
 module.exports = Util

@@ -13,11 +13,14 @@ router.get("/detail/:inv_id", utilities.handleErrors(invController.buildVehicleD
 // Inventory Management View
 router.get(
   "/",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildManagement)
 )
 
 router.get(
   "/add-classification",
+  utilities.checkLogin,
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddClassification)
 )
 
@@ -33,6 +36,7 @@ router.post(
 
 router.get(
   "/add-inventory",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildAddInventory)
 )
 
@@ -54,6 +58,17 @@ router.get(
 router.get(
   "/edit/:inv_id",
   utilities.handleErrors(invController.editInventoryView)
+)
+
+
+/* ***************************
+ *  Route to update inventory data
+ * ************************** */
+router.post(
+  "/update",
+   invValidate.inventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
 )
 
 module.exports = router;
