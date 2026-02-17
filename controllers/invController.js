@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const reviewModel = require("../models/review-model")
+
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -26,27 +28,37 @@ invCont.buildByClassificationId = async function (req, res, next) {
  ************************** */
 invCont.buildVehicleDetail = async function (req, res, next) {
   try {
-    const inv_id = parseInt(req.params.inv_id)
-    const data = await invModel.getVehicleById(inv_id)
+    const inv_id = parseInt(req.params.inv_id);
+    const account_id = res.locals.accountData?.account_id;
+
+    const data = await invModel.getVehicleById(inv_id);
+    const reviews = await reviewModel.getReviewsByInventory(inv_id);
 
     if (!data || data.length === 0) {
-      const err = new Error("Vehicle not found")
-      err.status = 404
-      return next(err)
+      const err = new Error("Vehicle not found");
+      err.status = 404;
+      return next(err);
     }
 
-    const vehicle = data[0]
-    const nav = await utilities.getNav()
+    const vehicle = data[0];
+    const nav = await utilities.getNav();
+
+    const hasReviewed = account_id
+      ? reviews.some(r => r.account_id === account_id)
+      : false;
 
     res.render("inventory/vehicle-detail", {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
-      vehicle
-    })
+      vehicle,
+      reviews,
+      hasReviewed,
+    });
   } catch (err) {
-    next(err)
+    next(err);
   }
-}
+};
+
 
 invCont.buildManagement = async (req, res, next) => {
   const nav = await utilities.getNav()

@@ -1,3 +1,7 @@
+<main>
+<%- messages() %>
+
+
 <div>
 <h1><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
 <div class="vehicle-container">
@@ -13,3 +17,61 @@
   </div>
 </div>
 </div>
+
+<div class="reviews-section">
+<h2>Reviews</h2>
+
+<% if (reviews.length === 0) { %>
+  <div class="no-reviews">No reviews yet.</div>
+<% } %>
+
+<% reviews.forEach(review => { %>
+  <div class="review-card">
+    <div class="review-text">
+    <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
+    <p><%= review.review_text %></p>
+</div>
+    <% if (loggedin && locals.accountData.account_id === review.account_id) { %>
+
+      <a href="/reviews/edit/<%= review.review_id %>">Edit</a>
+
+      <form action="/reviews/delete" method="post" style="display:inline;">
+        <input type="hidden" name="review_id" value="<%= review.review_id %>">
+        <button type="submit" class="delete-review">Delete</button>
+      </form>
+
+    <% } %>
+  </div>
+<% }) %>
+
+
+
+
+<% if (loggedin && !hasReviewed) { %>
+
+  <h3>Add a Review</h3>
+  <form action="/reviews/add" method="post">
+    <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+
+    <label>Rating</label>
+    <input type="number" name="rating" min="1" max="5" required>
+
+    <label>Review</label>
+    <textarea name="review_text" required></textarea>
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+<% } else if (loggedin && hasReviewed) { %>
+
+  <p>You already have a review.</p>
+
+<% } else { %>
+
+  <p>You must log in to leave a review.</p>
+
+<% } %>
+
+</div>
+
+</main>

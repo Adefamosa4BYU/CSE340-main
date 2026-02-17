@@ -15,6 +15,7 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const reviewRoutes = require("./routes/reviewRoute");
 const utilities = require("./utilities/")
 const errorController = require("./controllers/errorController")
 const http = require("http")
@@ -77,6 +78,9 @@ app.use("/inv", inventoryRoute)
 
 // Account Route
 app.use("/account", accountRoute)
+
+// Review Route
+app.use("/reviews", reviewRoutes);
 
 app.get("/cause-error", utilities.handleErrors(errorController.triggerError))
 

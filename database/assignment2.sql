@@ -35,3 +35,14 @@ SET
   inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
 
 
+-- Create a Review Database
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+    inv_id INT NOT NULL REFERENCES inventory(inv_id),
+    account_id INT NOT NULL REFERENCES account(account_id),
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    review_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+
