@@ -117,12 +117,13 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-       res.status(400).render("account/", {
-        title: "Welcome Page",
-      nav,
-      errors: null,
-    })
-      return 
+    //    res.status(400).render("account/", {
+    //     title: "Welcome Page",
+    //   nav,
+    //   errors: null,
+    // })
+    return res.redirect("/account")
+      
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
